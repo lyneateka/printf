@@ -11,22 +11,25 @@
 
 int _printf(const char *format, ...)
 {
-	char i = 0;
+	int i = 0;
 	va_list rl;
 
 	va_start(rl, format);
 	if (format == NULL)
 		return (-1);
-	while (format)
+	if (format[i] == '%')
+		i++;
+	switch (format[i])
 	{
-		if (format[i] == '%')
-			i++;
-		if (format[i] == 'c')
-			strcpy(c, va_arg(rl, char));
-		if (format[i] == 's')
-			strpy(s, va_arg(rl, *char));
-		va_end(rl);
-		write(1, format, (sizeof(char) * strlen(format)));
+		case 'c':
+			_putchar(va_arg(rl, int));
+			break;
+		case 's':
+			_putchar(va_arg(rl, int));
+			break;
+		default:
+			write(1, format, (sizeof(char) * strlen(format)));
+			break;
 	}
 	return (0);
 }
